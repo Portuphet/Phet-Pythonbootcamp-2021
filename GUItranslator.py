@@ -2,8 +2,8 @@
 from tkinter import * #จากไลบรารีชื่อ tkinter, * ตือให้ดึงความสามารถหลักมาทังหมด
 from tkinter import ttk # ttk is theme of tk
 ###--------------------------Google Translate----------------------
-from googletrans import Translator
-translator = Translator ( )      
+from google_trans_new import google_translator
+translator = google_translator ()      
 
 GUI = Tk ( ) #สร้างหน้าต่างหลัก
 GUI.geometry ( '500x300' ) #กว้าง x สูง
@@ -24,9 +24,9 @@ E1.pack (ipadx=40, ipady=5, pady=20) # show ช่่องกรอก
 # ----------------Button--------------------
 def Translate ( ):
       vocab = v_vocab.get ( ) # .get คือคำสั่งให้แสดงผลออกมาเนื่องจากไม่สามารถเรียนได้โดยตรง
-      meaning = translator.translate ( vocab, dest = 'th' )
-      print ( vocab + ' : ' + meaning.text )
-      v_result.set ( meaning.text )
+      trans = translator.translate ( [vocab], lang_tgt='th' )
+      meaning = trans.strip(" [, ], ' ")
+      v_result.set ( meaning )
 
 B1 = ttk.Button ( GUI,text = 'Translate', command=Translate ) #สร้างปุ่มขึ้นมา
 B1.pack (ipadx=20, ipady=10 ) # show ปุ่มขึ้นมาวางจากบนลงล่าง
